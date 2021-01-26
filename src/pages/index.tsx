@@ -62,6 +62,8 @@ const IndexPage: React.FC<PageProps<DataProps>> = () => {
         © {new Date().getFullYear()}, Built by
         {` `}
         <a href="https://kilowatts.io">kilowatts.io</a>
+        {`  `}
+        <a href="https://github.com/BenjaminWatts/covid-comparison/">Github</a>
       </Footer>
     </Layout>
   )
