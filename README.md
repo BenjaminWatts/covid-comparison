@@ -2,7 +2,7 @@
 
 This site shows Covid Comparisons across the UK.
 
-Drawing on the Official UK Government [data] (https://coronavirus.data.gov.uk/) available
+Drawing on the Official UK Government (data) [https://coronavirus.data.gov.uk/] available
 
 ## Build
 
