@@ -3,6 +3,7 @@ module.exports = {
     title: `UK Covid Dashboard`,
     description: `Compare Covid Rates Across the UK`,
     author: `@kilowatts.io`,
+    siteUrl: "https://covid-comparison.kilowatts.io",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
