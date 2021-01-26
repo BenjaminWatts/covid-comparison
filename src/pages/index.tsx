@@ -1,19 +1,13 @@
 import React from "react"
-import { PageProps, graphql } from "gatsby"
 import SEO from "../components/seo"
 import { LatestTable } from "../components/latestTable/latestTable"
 import { getLatest, GetLatestData } from "../requests/govUK"
-import { Spin, Button, Layout, Typography } from "antd"
-
-type DataProps = {
-  site: {
-    buildTime: string
-  }
-}
+import { Spin, Button, Layout, Typography, Card } from "antd"
+import { ErrorBoundary } from "react-error-boundary"
 
 const { Header, Content, Footer } = Layout
 
-const IndexPage: React.FC<PageProps<DataProps>> = () => {
+const ComparisonPage = () => {
   const [loading, setLoading] = React.useState(false)
   const [data, setData] = React.useState<null | GetLatestData>(null)
   const [error, setError] = React.useState(false)
@@ -69,12 +63,26 @@ const IndexPage: React.FC<PageProps<DataProps>> = () => {
   )
 }
 
-export default IndexPage
+type ErrorFallbackProps = {
+  error: Error
+  resetErrorBoundary: () => void
+}
 
-export const query = graphql`
-  {
-    site {
-      buildTime(formatString: "YYYY-MM-DD hh:mm a z")
-    }
-  }
-`
+const ErrorFallback = (props: ErrorFallbackProps) => {
+  return (
+    <Card title="Error">
+      {props.error.message}
+      <Button onClick={props.resetErrorBoundary}>Reload</Button>
+    </Card>
+  )
+}
+
+const IndexPage = () => {
+  return (
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <ComparisonPage />
+    </ErrorBoundary>
+  )
+}
+
+export default IndexPage
