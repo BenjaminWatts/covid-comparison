@@ -1,7 +1,5 @@
 import React from "react"
 import { PageProps, graphql } from "gatsby"
-
-// import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { LatestTable } from "../components/latestTable/latestTable"
 import { getLatest, GetLatestData } from "../requests/govUK"
