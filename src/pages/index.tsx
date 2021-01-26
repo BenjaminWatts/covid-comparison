@@ -14,16 +14,20 @@ type DataProps = {
 const { Header, Content, Footer } = Layout
 
 const IndexPage: React.FC<PageProps<DataProps>> = () => {
+  const [loading, setLoading] = React.useState(false)
   const [data, setData] = React.useState<null | GetLatestData>(null)
   const [error, setError] = React.useState(false)
 
   const getData = async () => {
+    setLoading(true)
     setError(false)
     try {
       setData(await getLatest())
     } catch (e) {
+      console.warn(e)
       setError(true)
     }
+    setLoading(false)
   }
 
   React.useEffect(() => {
@@ -38,7 +42,19 @@ const IndexPage: React.FC<PageProps<DataProps>> = () => {
         </Typography.Title>
       </Header>
       <Content style={{ height: "100%" }}>
-        {!data ? <Spin size="large" /> : <LatestTable data={data} />}
+        {loading === true && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: 10,
+            }}
+          >
+            <Spin size="large" />
+          </div>
+        )}
+        {data && <LatestTable data={data} />}
         {error ?? <Button onClick={getData}>Retry</Button>}
       </Content>
       <SEO title="UK Covid Dashboard" />
