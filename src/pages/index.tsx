@@ -2,7 +2,7 @@ import React from "react"
 import SEO from "../components/seo"
 import { LatestTable } from "../components/latestTable/latestTable"
 import { getLatest, GetLatestData } from "../requests/govUK"
-import { Spin, Button, Layout, Typography, Card } from "antd"
+import { Spin, Button, Layout, Typography, Card, Divider } from "antd"
 import { ErrorBoundary } from "react-error-boundary"
 
 const { Header, Content, Footer } = Layout
@@ -46,6 +46,10 @@ const ComparisonPage = () => {
             }}
           >
             <Spin size="large" />
+            <Divider/>
+            <Typography.Paragraph>
+              Covid Comparison provides a comparison of covid rates between UK local authorities. You can compare covid rates now, and for the duration of the pandemic, including on a per capita basis and across both lower tier and upper tier local authorities. Data is updated daily from Gov.uk.
+            </Typography.Paragraph>
           </div>
         )}
         {data && <LatestTable data={data} />}
