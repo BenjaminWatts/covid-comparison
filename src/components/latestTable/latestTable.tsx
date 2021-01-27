@@ -133,7 +133,7 @@ export const LatestTable = (props: LatestTableProps) => {
 
   const columns = [areaColumn, ...selectColumns(duration, measure)]
 
-  console.log(tableState)
+  // console.log(tableState)
 
   function onChange(pagination, filters, sorter, extra) {
     setTableState({
