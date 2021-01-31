@@ -114,6 +114,8 @@ const areaColumn = {
   dataIndex: "areaName",
 }
 
+const maxWidth = 1000
+
 const readDate = (dateString: string) =>
   new Date(Date.parse(dateString)).toLocaleDateString()
 
@@ -162,7 +164,7 @@ export const LatestTable = (props: LatestTableProps) => {
 
   return (
     <Space direction="vertical" style={{ width: "100%", padding: 10 }}>
-      <Card style={{ maxWidth: 500 }}>
+      <Card style={{ maxWidth }}>
         <Typography.Title level={5}>Data options</Typography.Title>
         {duration === Duration.current ? (
           <Button onClick={() => setDuration(Duration.cumulative)}>
@@ -202,10 +204,12 @@ export const LatestTable = (props: LatestTableProps) => {
 
       <Table
         size="small"
-        style={{ maxWidth: 500 }}
+        style={{ maxWidth }}
         dataSource={dataSource()}
         columns={columns}
+        // pagination={false}
         onChange={onChange}
+        // defaultSortOrder='newCasesBySpecimenDate'
       />
 
       <Typography.Paragraph>

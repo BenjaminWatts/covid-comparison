@@ -9,18 +9,20 @@ type LatestOptions = {
 export type LatestDataItem = {
   date: string
   areaName: string
-  newDeaths28DaysByDeathDate: string
-  newCasesBySpecimenDate: string
-  cumCasesBySpecimenDateRate: string
-  cumDeaths28DaysByDeathDate: string
-  cumCasesBySpecimenDate: string
-  cumDeaths28DaysByDeathDateRate: string
+  newDeaths28DaysByDeathDate: number
+  newCasesBySpecimenDate: number
+  cumCasesBySpecimenDateRate: number
+  cumDeaths28DaysByDeathDate: number
+  cumCasesBySpecimenDate: number
+  cumDeaths28DaysByDeathDateRate: number
 }
 
 type LatestData = LatestDataItem[]
 
-export const getLatestByType = (options: LatestOptions): Promise<LatestData> =>
-  getPaginatedData(
+export const getLatestByType = async (
+  options: LatestOptions
+): Promise<LatestData> => {
+  let data: LatestData = await getPaginatedData(
     [`areaType=${options.areaType}`],
     {
       date: "date",
@@ -34,6 +36,10 @@ export const getLatestByType = (options: LatestOptions): Promise<LatestData> =>
     },
     "cumDeaths28DaysByDeathDateRate"
   )
+  return [...data].sort(
+    (a, b) => a.newCasesBySpecimenDate - b.newCasesBySpecimenDate
+  )
+}
 
 export type GetLatestData = {
   utla: LatestData
